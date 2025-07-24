@@ -20,7 +20,7 @@ public class Camera {
 
     public double[][][] PixelVectors = new double[ResX][ResY][3];
 
-    private Etc etc = new Etc();
+    private final Etc etc = new Etc();
 
     public void init(double fov, double focalLength, int resX, int resY, double posX, double posY, double posZ, double rotX, double rotY, double rotZ){
         ResX = resX;
@@ -116,9 +116,5 @@ public class Camera {
         int Xproj = (int)Math.round((FL*VertexIn[0])/(FL+VertexIn[2]));
         int Yproj = (int)Math.round((FL*VertexIn[1])/(FL+VertexIn[2]));
         return new int[] {Xproj,Yproj};
-    }
-
-    public double[] PixelToVector(int x, int y){
-        return PixelVectors[x][y];
     }
 }
