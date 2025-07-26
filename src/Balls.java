@@ -7,14 +7,15 @@ public class Balls {
 
     double R;
 
-    public int[] color;
+    public Mtl mtl;
 
     private final Etc etc = new Etc();
-    public void init(double x, double y, double z, double r){
+    public void init(double x, double y, double z, double r, Mtl material){
         X=x;
         Y=y;
         Z=z;
         R=r;
+        mtl = material;
     }
     public HitInfo doesRayHit(double[] direction, double[] origin){
         double[] offsetOrigen = {

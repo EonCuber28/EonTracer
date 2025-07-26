@@ -18,8 +18,11 @@ public class Main {
             // referance
             //canvas.setPixel(5,1,255,255,255);
             Balls ball = new Balls();
-            ball.init(0,0,0,1);
-            ball.color = new int[] {100,255,200};
+            Mtl mtl = new Mtl();
+            mtl.color = new int[]{100,200,50};
+            mtl.emissionColor = new int[]{255,255,255};
+            mtl.emissionStrength = 1;
+            ball.init(0,0,0,1, mtl);
             Camera cam = new Camera();
             cam.CalcTransform();
             cam.calculatePixelVectors();
@@ -29,9 +32,9 @@ public class Main {
                     double[] vector = cam.PixelVectors[x][y];
                     HitInfo hitinfo = ball.doesRayHit(vector,origin);
                     if (hitinfo.hits){
-                        int red = ball.color[0];
-                        int green = ball.color[1];
-                        int blue = ball.color[2];
+                        int red = ball.mtl.color[0];
+                        int green = ball.mtl.color[1];
+                        int blue = ball.mtl.color[2];
                         canvas.setPixel(x,y, red,green,blue);
                     }
                 }
