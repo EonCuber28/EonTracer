@@ -6,7 +6,6 @@ public class Main {
     private static final int FinalX = 1000;
     private static final int FinalY = 1000;
     private static final String title = "EonTracer";
-    private static final Etc etc = new Etc();
     public static void main(String[] args){
         SwingUtilities.invokeLater(() -> {
             // normal setup stuff

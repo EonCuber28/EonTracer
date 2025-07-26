@@ -9,7 +9,7 @@ public class Balls {
 
     public Mtl mtl;
 
-    private final Etc etc = new Etc();
+    public final Etc etc = new Etc();
     public void init(double x, double y, double z, double r, Mtl material){
         X=x;
         Y=y;
