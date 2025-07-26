@@ -8,11 +8,11 @@ public class Camera {
     public int ResY = 1000;
     public double aspectRatio = (double)ResX/ResY;
 
-    public double PosX = 0;
-    public double PosY = 0;
-    public double PosZ = 0;
+    public double PosX = 2.5;
+    public double PosY = 2.5;
+    public double PosZ = -10;
 
-    public double RotX = Math.PI/2;
+    public double RotX = 0;
     public double RotY = 0;
     public double RotZ = 0;
 
@@ -84,6 +84,7 @@ public class Camera {
     }
 
     public void calculatePixelVectors(){
+        double[] camPos = {PosX,PosY,PosZ};
         //calculate width and height of the projection plane
         double planeHeight = FL*Math.tan(FOV*0.5)*2;
         double planeWidth = planeHeight*aspectRatio;
@@ -103,10 +104,7 @@ public class Camera {
                         point[1]-Translate2cam[13],
                         point[2]-Translate2cam[14]};
                 double[] vector = etc.normaliseVector(preVector);
-
-                PixelVectors[x][y][0] = vector[0];
-                PixelVectors[x][y][1] = vector[1];
-                PixelVectors[x][y][2] = vector[2];
+                PixelVectors[x][y] = vector;
             }
         }
     }

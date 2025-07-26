@@ -9,4 +9,12 @@ public class Etc{
                 Vector[1]/length,
                 Vector[2]/length};
     }
+    public double dot(double[] V1, double[] V2){
+        double dot = 0;
+        int longestLen = Math.max(V1.length, V2.length);
+        for (int i = 0; i < longestLen; i++){
+            dot += V1[i]*V2[i];
+        }
+        return dot;
+    }
 }
