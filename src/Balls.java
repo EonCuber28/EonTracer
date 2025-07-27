@@ -1,4 +1,3 @@
-import jdk.jshell.execution.JdiDefaultExecutionControl;
 
 public class Balls {
     double X;
@@ -17,14 +16,17 @@ public class Balls {
         R=r;
         mtl = material;
     }
-    public HitInfo doesRayHit(double[] direction, double[] origin){
+    public HitInfo doesRayHit(float[] direction, double[] origin){
         double[] offsetOrigen = {
                 origin[0]-X,
                 origin[1]-Y,
                 origin[2]-Z
         };
-        double a = etc.dot(direction,direction);
-        double b = 2*etc.dot(offsetOrigen, direction);
+        double a = 1;
+        double b = 2*etc.dot(offsetOrigen, new double[]{
+                (double)(direction[0]),
+                (double)(direction[1]),
+                (double)(direction[2])});
         double c = etc.dot(offsetOrigen,offsetOrigen) - R*R;
 
         double discriminant = b*b - 4*a*c;
@@ -55,5 +57,5 @@ class HitInfo{
     boolean hits;
     double distance;
     double[] hitPoint;
-    double[] hitNormal;
+    float[] hitNormal;
 }

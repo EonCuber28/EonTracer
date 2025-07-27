@@ -4,12 +4,12 @@ public class Camera {
 
     public double FL = 1;
 
-    public int ResX = 1000;
-    public int ResY = 1000;
+    public int ResX = 1280;
+    public int ResY = 720;
     public double aspectRatio = (double) ResX / ResY;
 
-    public double PosX = 2.5;
-    public double PosY = 2.5;
+    public double PosX = 5;
+    public double PosY = 3;
     public double PosZ = -10;
 
     public double RotX = 0;
@@ -18,7 +18,7 @@ public class Camera {
 
     public double[] Translate2cam;
 
-    public double[][][] PixelVectors = new double[ResX][ResY][3];
+    public float[][][] PixelVectors = new float[ResX][ResY][3];
 
     private final Etc etc = new Etc();
 
@@ -82,7 +82,7 @@ public class Camera {
                         point[0] - Translate2cam[12],
                         point[1] - Translate2cam[13],
                         point[2] - Translate2cam[14]};
-                double[] vector = etc.normaliseVector(preVector);
+                float[] vector = etc.normaliseVector(preVector);
                 PixelVectors[x][y] = vector;
             }
         }

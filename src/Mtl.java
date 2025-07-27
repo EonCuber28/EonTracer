@@ -2,5 +2,5 @@
 public class Mtl {
     int[] color;
     int[] emissionColor;
-    int emissionStrength;
+    double emissionStrength;
 }
