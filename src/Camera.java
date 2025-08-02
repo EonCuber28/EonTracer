@@ -4,8 +4,8 @@ public class Camera {
 
     public double FL = 1;
 
-    public int ResX = 1280;
-    public int ResY = 720;
+    public int ResX = 3840;
+    public int ResY = 2160;
     public double aspectRatio = (double) ResX / ResY;
 
     public double PosX = 5;
@@ -64,6 +64,7 @@ public class Camera {
     }
 
     public void calculatePixelVectors() {
+        aspectRatio = (double) ResX /ResY;
         //calculate width and height of the projection plane
         double planeHeight = FL * Math.tan(FOV * 0.5) * 2;
         double planeWidth = planeHeight * aspectRatio;
