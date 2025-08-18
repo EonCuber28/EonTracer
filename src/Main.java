@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 public class Main {
-    private static final int ResX = 3840;
-    private static final int ResY = 2160;
+    private static final int ResX = 1280;
+    private static final int ResY = 720;
     private static final int FinalX = 1280;
     private static final int FinalY = 720;
 
@@ -15,8 +16,8 @@ public class Main {
     private static final Camera cam = new Camera();
     private static Balls[] balls = new Balls[]{};
     // render stetings
-    private static final int maxBounces = 15;
-    private static final int RPP = 5000;
+    private static final int maxBounces = 2;
+    private static final int RPP = 100;
     // sky color settings
     private static final double[] SkyColorHorizon = new double[]{20,20,20};
     private static final double[] SkyColorZenith = new double[]{20,20,20};
@@ -71,14 +72,23 @@ public class Main {
             int availableCores = Runtime.getRuntime().availableProcessors();
             // divide the screen space into sectors for each of the cores
             int[][] Sectors = generateSectors(ResX,ResY, availableCores);
+            // start the thread thingy
+            CountDownLatch latch = new CountDownLatch(Sectors.length);
             // run the cores
-            for (int sectorIndex = 0; sectorIndex < Sectors.length; sectorIndex++){
-                int[] sector = Sectors[sectorIndex];
-                new Thread(() ->{
+            for (int[] sector : Sectors) {
+                new Thread(() -> {
                     runRaytracerForSector(canvas, sector);
+                    latch.countDown();
                 }).start();
             }
-            new Thread(()-> saveImage(canvas)).start();
+            new Thread(()-> {
+                try{
+                    latch.await();
+                    saveImage(canvas);
+                } catch (InterruptedException e){
+                    Thread.currentThread().interrupt();
+                }
+            }).start();
         });}
     public static void saveImage(PixelCanvas canvas){
         Scanner scanner = new Scanner(System.in);
@@ -210,9 +220,9 @@ public class Main {
                             incomingLight[1] += emmittedGreen * rayColor[1];
                             incomingLight[2] += emmittedBlue * rayColor[2];
                             // get base lighting
-                            rayColor[0] *= closestMtl.color[0]/255;
-                            rayColor[1] *= closestMtl.color[1]/255;
-                            rayColor[2] *= closestMtl.color[2]/255;
+                            rayColor[0] *= (closestMtl.color[0]/255)*etc.dot(closestHit.hitNormal, vector);
+                            rayColor[1] *= (closestMtl.color[1]/255)*etc.dot(closestHit.hitNormal, vector);
+                            rayColor[2] *= (closestMtl.color[2]/255)*etc.dot(closestHit.hitNormal, vector);
                         }
                     }
                     totalRayColors[0] += incomingLight[0];
@@ -226,7 +236,7 @@ public class Main {
             }
         }
     }
-    public static void runRaytracerSingleThread(PixelCanvas canvas, int[] sector) {
+    public static void runRaytracerSingleThread(PixelCanvas canvas) {
         Balls[] balls;
         if (true) {
             // yellow ball (sun)

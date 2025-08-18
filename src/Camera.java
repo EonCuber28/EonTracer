@@ -4,8 +4,8 @@ public class Camera {
 
     public double FL = 1;
 
-    public int ResX = 3840;
-    public int ResY = 2160;
+    public int ResX = 1820;
+    public int ResY = 720;
     public double aspectRatio = (double) ResX / ResY;
 
     public double PosX = 5;

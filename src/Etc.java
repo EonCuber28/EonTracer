@@ -17,6 +17,30 @@ public class Etc{
         }
         return dot;
     }
+    public double dot(float[] V1, double[] V2){
+        double dot = 0;
+        int longestLen = Math.max(V1.length, V2.length);
+        for (int i = 0; i < longestLen; i++){
+            dot += V1[i]*V2[i];
+        }
+        return dot;
+    }
+    public double dot(double[] V1, float[] V2){
+        double dot = 0;
+        int longestLen = Math.max(V1.length, V2.length);
+        for (int i = 0; i < longestLen; i++){
+            dot += V1[i]*V2[i];
+        }
+        return dot;
+    }
+    public double dot(float[] V1, float[] V2){
+        double dot = 0;
+        int longestLen = Math.max(V1.length, V2.length);
+        for (int i = 0; i < longestLen; i++){
+            dot += V1[i]*V2[i];
+        }
+        return dot;
+    }
     public double lerp(double v1, double v2, double t){
         return (1-t)*v1+t*v2;
     }

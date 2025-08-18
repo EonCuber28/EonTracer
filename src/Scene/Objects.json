@@ -1,0 +1,16 @@
+{
+  "Objects": [
+    {
+      "Name": "Ball",
+      "Vertex Table": [[0,0,0],[1,1,1],[2,2,2]],
+      "Normal Table": [[1,0,0]],
+      "Tri table": [[0,1,2, 1]],
+      "Material": {
+        "Color": [255,255,255],
+        "EmmissionColor": [0,0,0],
+        "EmmissionStrength": 0,
+        "Roughness": 1
+      }
+    }
+  ]
+}
