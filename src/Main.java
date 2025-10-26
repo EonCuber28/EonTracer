@@ -16,15 +16,15 @@ public class Main {
     private static final Camera cam = new Camera();
     private static Balls[] balls = new Balls[]{};
     // render stetings
-    private static final int maxBounces = 2;
+    private static final int maxBounces = 15;
     private static final int RPP = 100;
     // sky color settings
     private static final double[] SkyColorHorizon = new double[]{20,20,20};
     private static final double[] SkyColorZenith = new double[]{20,20,20};
     private static final double[] groundColor = new  double[]{20,20,20};
     private static final float[] SunlightDirection = etc.normaliseVector(new double[]{1,1,1});
-    private static final double SunFocus = 0;
-    private static final double SunIntensity = 0;
+    private static final double SunFocus = 1;
+    private static final double SunIntensity = 1;
 
     public static void main(String[] args){
         SwingUtilities.invokeLater(() -> {
@@ -38,8 +38,8 @@ public class Main {
                 // yellow ball (sun)
                 Balls sun = new Balls();
                 Mtl sunMtl = new Mtl();
-                sunMtl.color = new double[]{0, 0, 0};
-                sunMtl.emissionColor = new double[]{255, 255, 255};
+                sunMtl.color = new double[]{0, 0, 255};
+                sunMtl.emissionColor = new double[]{0, 0, 0};
                 sunMtl.emissionStrength = 0.8;
                 sun.init(2, 0, 0, 1, sunMtl);
                 // grey ball (subject)
@@ -70,6 +70,7 @@ public class Main {
             // sent it to a seperate threads for no fucky wuckys with the main thread handleing the canvas.
             // get the amount of available cores
             int availableCores = Runtime.getRuntime().availableProcessors();
+            System.out.println("Number of cores: "+availableCores);
             // divide the screen space into sectors for each of the cores
             int[][] Sectors = generateSectors(ResX,ResY, availableCores);
             // start the thread thingy
